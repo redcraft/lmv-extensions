@@ -1,5 +1,5 @@
 {
-  "name": "LMV Examples",
+  "name": "LMV Extensions",
   "description": "Demonstrates how to create and use extensions for Autodesk Large Model Viewer",
   "repository": "https://github.com/redcraft/lmv-extensions",
   "keywords": ["Autodesk", "LMV", "viewer", "3d"],

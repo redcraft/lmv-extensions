@@ -18,7 +18,11 @@
     "url": "https://github.com/redcraft/lmv-extensions"
   },
   "dependencies": {
+    "bower": "^1.6.5",
     "express": "^4.13.3",
     "form-urlencoded": "^0.1.4"
+  },
+  "scripts": {
+    "postinstall": "bower install"
   }
 }
