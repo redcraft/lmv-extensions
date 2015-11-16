@@ -29,5 +29,6 @@ build/Release
 node_modules
 
 nod# Created by .ignore support plugin (hsz.mobi)
-
+/config.json
+.idea
 /public/bower_components

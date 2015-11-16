@@ -1,5 +1,8 @@
 {
-  "name": "ng-gallery",
+  "name": "lmv-extensions",
+  "version": "1.0.0",
+  "main": "server.js",
+  "authors": ["Maxim Gurkin"],
 
   "devDependencies": {
     "bootstrap":              "3.3.2",

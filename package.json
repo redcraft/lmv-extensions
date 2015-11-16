@@ -1,14 +1,15 @@
 {
-  "name": "liam",
+  "name": "lmv-extensions",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Demonstrates how to create and use extensions for Large Model Viewer",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Maxim Gurkin",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "form-urlencoded": "^0.1.4"
   }
 }

@@ -1,10 +1,20 @@
 var express = require('express');
 var https = require('https');
+var formurlencoded = require('form-urlencoded');
+
+var config = {};
+if (process.env.CLIENT_ID && process.env.CLIENT_SECRET) {
+    config.client_id = process.env.CLIENT_ID;
+    config.client_secret = process.env.CLIENT_SECRET;
+} else {
+    config = require('./config.json');
+}
+config.grant_type = 'client_credentials';
 
 var app = express();
 app.use('/', express.static(__dirname + '/public'));
-var router = express.Router();
 
+var router = express.Router();
 router.get('/extensions', function (req, res) {
     res.json([
 		{"_id":"555cb32a904e18c811dcf24a","id":"Autodesk.ADN.Viewing.Extension.ScreenShotManager","name":"ScreenShotManager ","file":"Autodesk.ADN.Viewing.Extension.ScreenShotManager.js"},
@@ -37,14 +47,13 @@ router.get('/auth', function (req, authRes) {
 		console.log("Got error: " + e.message);
 	});
 
-	post_req.write('client_id=hW6ssKdAA5Yb3iMzI1IAn1WUf5gjtF4f&client_secret=mG1amD93lYGDVoT3&grant_type=client_credentials');
+	post_req.write(formurlencoded.encode(config));
 	post_req.end();
 });
 
 app.use('/api', router);
 
 app.set('port', process.env.PORT || 3000);
-
 var server = app.listen(app.get('port'), function() {
 
     console.log('Server listening on: ');
