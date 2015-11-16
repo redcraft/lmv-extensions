@@ -1,13 +1,22 @@
 {
   "name": "lmv-extensions",
   "version": "1.0.0",
-  "description": "Demonstrates how to create and use extensions for Large Model Viewer",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Demonstrates how to create and use extensions for Autodesk Large Model Viewer",
+  "author": {
+    "name": "Maxim Gurkin",
+    "email": "redmax3d@gmail.com"
   },
-  "author": "Maxim Gurkin",
-  "license": "ISC",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redcraft/lmv-extensions"
+  },
   "dependencies": {
     "express": "^4.13.3",
     "form-urlencoded": "^0.1.4"
