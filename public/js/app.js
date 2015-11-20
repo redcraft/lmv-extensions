@@ -7,7 +7,7 @@ function initialize() {
     };
     var viewerElement = document.getElementById('viewer');
     var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement,
-        {extensions: ['Autodesk.ADN.Viewing.Extension.ExtensionManager'], apiUrl: 'api/extensions', extensionsUrl: '/extensions', extensionsSourceUrl: '/extensions'});
+        {extensions: ['Autodesk.ADN.Viewing.Extension.ExtensionManager'], apiUrl: 'api/extensions', extensionsUrl: 'extensions', extensionsSourceUrl: 'extensions'});
     Autodesk.Viewing.Initializer(
         options,
         function() {
@@ -25,7 +25,7 @@ function getToken() {
 		url: "api/auth",
 		async: false,
 		success : function(data) {
-			accessToken = $.parseJSON(data).access_token;
+			accessToken = data.access_token;
 		}
 	});
 

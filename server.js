@@ -7,7 +7,11 @@ if (process.env.CLIENT_ID && process.env.CLIENT_SECRET) {
     config.client_id = process.env.CLIENT_ID;
     config.client_secret = process.env.CLIENT_SECRET;
 } else {
-    config = require('./config.json');
+    try {
+        config = require('./config.json');
+    } catch(e) {
+        console.log("No config defined");
+    }
 }
 config.grant_type = 'client_credentials';
 
@@ -24,31 +28,65 @@ router.get('/extensions', function (req, res) {
 	]);
 });
 
+var authWithCredentials = function(req, authRes) {
+    var options = {
+        host: 'developer.api.autodesk.com',
+        path: '/authentication/v1/authenticate',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+
+    var post_req = https.request(options, function(res) {
+        var body = '';
+        res.on('data', function(chunk) {
+            body += chunk;
+        });
+        res.on('end', function() {
+            authRes.setHeader("Content-Type", "application/json");
+            authRes.end(body);
+        });
+    }).on('error', function(e) {
+        console.log("Got error: " + e.message);
+    });
+
+    post_req.write(formurlencoded.encode(config));
+    post_req.end();
+}
+
+var authWithoutCredentials = function(req, authRes) {
+    var options = {
+        host: 'examples.developer.autodesk.com',
+        path: '/lmv-extensions/api/auth',
+        method: 'GET'
+    };
+
+    https.get(options, function(res) {
+        var body = '';
+        res.on('data', function(chunk) {
+            body += chunk;
+        });
+        res.on('end', function() {
+            authRes.setHeader("Content-Type", "application/json");
+            authRes.end(body);
+        });
+    }).on('error', function(e) {
+        console.log("Got error: " + e.message);
+    });
+
+}
+
 router.get('/auth', function (req, authRes) {
-	var options = {
-		host: 'developer.api.autodesk.com',
-		path: '/authentication/v1/authenticate',
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
-	};
-
-	var post_req = https.request(options, function(res) {
-		var body = '';
-		res.on('data', function(chunk) {
-			body += chunk;
-		});
-		res.on('end', function() {
-			authRes.json(body);
-		});
-	}).on('error', function(e) {
-		console.log("Got error: " + e.message);
-	});
-
-	post_req.write(formurlencoded.encode(config));
-	post_req.end();
+    if(config.client_id && config.client_secret) {
+        authWithCredentials(req, authRes);
+    }
+    else {
+        authWithoutCredentials(req, authRes)
+    }
 });
+
+
 
 app.use('/api', router);
 
