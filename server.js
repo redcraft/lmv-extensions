@@ -40,7 +40,6 @@ router.get('/auth', function (req, authRes) {
 			body += chunk;
 		});
 		res.on('end', function() {
-			console.log(body);
 			authRes.json(body);
 		});
 	}).on('error', function(e) {
@@ -53,9 +52,10 @@ router.get('/auth', function (req, authRes) {
 
 app.use('/api', router);
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || process.argv[2] || 3000);
 var server = app.listen(app.get('port'), function() {
 
     console.log('Server listening on: ');
     console.log(server.address());
+    console.log('Open this link to see the app: http://localhost:' + app.get('port') + '/');
 });
