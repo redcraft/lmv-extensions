@@ -7,9 +7,9 @@ This example demonstrates adding new functionality to Autodesk Large Model Viewe
 
 Each dynamic extension provided by the Extension Manager provides a great example of adding a new functionality to the Viewer. To see the extension source code, you may click the “Source” button or just view the source code of this example.
 
-##Source code and deployment
+##Deployment
 
-To run the application, you need to have Node.js installed on your machine. Navigate to the application folder and call 'npm install' to get the application dependencies. You can then execute 'node server.js' to run your application. The application can be accessed from localhost:3000.
+To run the application, you need to have [Node.js](https://nodejs.org) installed on your machine. Navigate to the application folder and call 'npm install' to get the application dependencies. You can then execute 'node server.js' to run your application. The application can be accessed from localhost:3000.
 
 To make a quick deployment of this application to Heroku you may use the button below.
 
